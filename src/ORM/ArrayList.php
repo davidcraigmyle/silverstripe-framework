@@ -2,12 +2,12 @@
 
 namespace SilverStripe\ORM;
 
-use SilverStripe\Dev\Debug;
-use SilverStripe\View\ArrayData;
-use SilverStripe\View\ViewableData;
 use ArrayIterator;
 use InvalidArgumentException;
 use LogicException;
+use SilverStripe\Dev\Debug;
+use SilverStripe\View\ArrayData;
+use SilverStripe\View\ViewableData;
 
 /**
  * A list object that wraps around an array of objects or arrays.
@@ -44,16 +44,38 @@ class ArrayList extends ViewableData implements SS_List, Filterable, Sortable, L
     }
 
     /**
+     * Underlying type class for this list
+     *
+     * @var string
+     */
+    protected $dataClass = null;
+
+    /**
      * Return the class of items in this list, by looking at the first item inside it.
      *
      * @return string
      */
     public function dataClass()
     {
+        if ($this->dataClass) {
+            return $this->dataClass;
+        }
         if (count($this->items) > 0) {
             return get_class($this->items[0]);
         }
         return null;
+    }
+
+    /**
+     * Hint this list to a specific type
+     *
+     * @param string $class
+     * @return $this
+     */
+    public function setDataClass($class)
+    {
+        $this->dataClass = $class;
+        return $this;
     }
 
     /**
@@ -140,7 +162,7 @@ class ArrayList extends ViewableData implements SS_List, Filterable, Sortable, L
                 if (method_exists($item, 'toMap')) {
                     $result[] = $item->toMap();
                 } else {
-                    $result[] = (array) $item;
+                    $result[] = (array)$item;
                 }
             } else {
                 $result[] = $item;
@@ -398,7 +420,7 @@ class ArrayList extends ViewableData implements SS_List, Filterable, Sortable, L
      * Parses a specified column into a sort field and direction
      *
      * @param string $column String to parse containing the column name
-     * @param mixed $direction Optional Additional argument which may contain the direction
+     * @param mixed  $direction Optional Additional argument which may contain the direction
      * @return array Sort specification in the form array("Column", SORT_ASC).
      */
     protected function parseSortColumn($column, $direction = null)
@@ -449,19 +471,19 @@ class ArrayList extends ViewableData implements SS_List, Filterable, Sortable, L
     {
         $args = func_get_args();
 
-        if (count($args)==0) {
+        if (count($args) == 0) {
             return $this;
         }
-        if (count($args)>2) {
+        if (count($args) > 2) {
             throw new InvalidArgumentException('This method takes zero, one or two arguments');
         }
         $columnsToSort = [];
 
         // One argument and it's a string
-        if (count($args)==1 && is_string($args[0])) {
+        if (count($args) == 1 && is_string($args[0])) {
             list($column, $direction) = $this->parseSortColumn($args[0]);
             $columnsToSort[$column] = $direction;
-        } elseif (count($args)==2) {
+        } elseif (count($args) == 2) {
             list($column, $direction) = $this->parseSortColumn($args[0], $args[1]);
             $columnsToSort[$column] = $direction;
         } elseif (is_array($args[0])) {
@@ -619,7 +641,7 @@ class ArrayList extends ViewableData implements SS_List, Filterable, Sortable, L
      */
     protected function normaliseFilterArgs($column, $value = null)
     {
-        if (count(func_get_args())>2) {
+        if (count(func_get_args()) > 2) {
             throw new InvalidArgumentException('filter takes one array or two arguments');
         }
 
@@ -628,11 +650,11 @@ class ArrayList extends ViewableData implements SS_List, Filterable, Sortable, L
         }
 
         $keepUs = array();
-        if (count(func_get_args())==2) {
+        if (count(func_get_args()) == 2) {
             $keepUs[func_get_arg(0)] = func_get_arg(1);
         }
 
-        if (count(func_get_args())==1 && is_array(func_get_arg(0))) {
+        if (count(func_get_args()) == 1 && is_array(func_get_arg(0))) {
             foreach (func_get_arg(0) as $column => $value) {
                 $keepUs[$column] = $value;
             }
@@ -713,9 +735,9 @@ class ArrayList extends ViewableData implements SS_List, Filterable, Sortable, L
         foreach ($removeUs as $column => $excludeValue) {
             foreach ($this->items as $key => $item) {
                 if (!is_array($excludeValue) && $this->extractValue($item, $column) == $excludeValue) {
-                    $matches[$key]=isset($matches[$key])?$matches[$key]+1:1;
+                    $matches[$key] = isset($matches[$key]) ? $matches[$key] + 1 : 1;
                 } elseif (is_array($excludeValue) && in_array($this->extractValue($item, $column), $excludeValue)) {
-                    $matches[$key]=isset($matches[$key])?$matches[$key]+1:1;
+                    $matches[$key] = isset($matches[$key]) ? $matches[$key] + 1 : 1;
                 }
             }
         }
@@ -794,7 +816,7 @@ class ArrayList extends ViewableData implements SS_List, Filterable, Sortable, L
      * object or array.
      *
      * @param array|object $item
-     * @param string $key
+     * @param string       $key
      * @return mixed
      */
     protected function extractValue($item, $key)

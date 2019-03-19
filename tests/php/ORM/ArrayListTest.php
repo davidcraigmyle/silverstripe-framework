@@ -2,11 +2,10 @@
 
 namespace SilverStripe\ORM\Tests;
 
+use SilverStripe\Dev\SapphireTest;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\Filterable;
-use SilverStripe\Dev\SapphireTest;
-use SilverStripe\View\ArrayData;
 use stdClass;
 
 class ArrayListTest extends SapphireTest
@@ -16,7 +15,7 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Num' => 1)
+                array('Num' => 1)
             )
         );
 
@@ -33,9 +32,9 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            $one = new DataObject(array('Title' => 'one')),
-            $two = new DataObject(array('Title' => 'two')),
-            $three = new DataObject(array('Title' => 'three'))
+                $one = new DataObject(array('Title' => 'one')),
+                $two = new DataObject(array('Title' => 'two')),
+                $three = new DataObject(array('Title' => 'three'))
             )
         );
         $this->assertEquals(count($list), 3);
@@ -47,9 +46,9 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            $one = new DataObject(array('Title' => 'one')),
-            $two = new DataObject(array('Title' => 'two')),
-            $three = new DataObject(array('Title' => 'three'))
+                $one = new DataObject(array('Title' => 'one')),
+                $two = new DataObject(array('Title' => 'two')),
+                $three = new DataObject(array('Title' => 'three'))
             )
         );
         unset($list[0]);
@@ -84,18 +83,18 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('First' => 'FirstFirst', 'Second' => 'FirstSecond'),
-            (object) array('First' => 'SecondFirst', 'Second' => 'SecondSecond'),
-            new ArrayListTest\TestObject('ThirdFirst', 'ThirdSecond')
+                array('First' => 'FirstFirst', 'Second' => 'FirstSecond'),
+                (object)array('First' => 'SecondFirst', 'Second' => 'SecondSecond'),
+                new ArrayListTest\TestObject('ThirdFirst', 'ThirdSecond')
             )
         );
 
         $this->assertEquals(
             $list->toNestedArray(),
             array(
-            array('First' => 'FirstFirst', 'Second' => 'FirstSecond'),
-            array('First' => 'SecondFirst', 'Second' => 'SecondSecond'),
-            array('First' => 'ThirdFirst', 'Second' => 'ThirdSecond')
+                array('First' => 'FirstFirst', 'Second' => 'FirstSecond'),
+                array('First' => 'SecondFirst', 'Second' => 'SecondSecond'),
+                array('First' => 'ThirdFirst', 'Second' => 'ThirdSecond')
             )
         );
     }
@@ -122,13 +121,13 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Key' => 1), array('Key' => 2), array('Key' => 3)
+                array('Key' => 1), array('Key' => 2), array('Key' => 3)
             )
         );
         $this->assertEquals(
             $list->limit(2, 1)->toArray(),
             array(
-            array('Key' => 2), array('Key' => 3)
+                array('Key' => 2), array('Key' => 3)
             )
         );
     }
@@ -137,7 +136,7 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Key' => 1), array('Key' => 2)
+                array('Key' => 1), array('Key' => 2)
             )
         );
 
@@ -145,7 +144,7 @@ class ArrayListTest extends SapphireTest
         $this->assertEquals(
             $list->toArray(),
             array(
-            array('Key' => 1), array('Key' => 2), array('Key' => 3)
+                array('Key' => 1), array('Key' => 2), array('Key' => 3)
             )
         );
 
@@ -153,7 +152,7 @@ class ArrayListTest extends SapphireTest
         $this->assertEquals(
             array_values($list->toArray()),
             array(
-            array('Key' => 1), array('Key' => 3)
+                array('Key' => 1), array('Key' => 3)
             )
         );
     }
@@ -162,9 +161,9 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Key' => 1),
-            $two = (object) array('Key' => 2),
-            (object) array('Key' => 3)
+                array('Key' => 1),
+                $two = (object)array('Key' => 2),
+                (object)array('Key' => 3)
             )
         );
 
@@ -183,12 +182,12 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Num' => 1), array('Num' => 2)
+                array('Num' => 1), array('Num' => 2)
             )
         );
         $list->merge(
             array(
-            array('Num' => 3), array('Num' => 4)
+                array('Num' => 3), array('Num' => 4)
             )
         );
 
@@ -196,7 +195,7 @@ class ArrayListTest extends SapphireTest
         $this->assertEquals(
             $list->toArray(),
             array(
-            array('Num' => 1), array('Num' => 2), array('Num' => 3), array('Num' => 4)
+                array('Num' => 1), array('Num' => 2), array('Num' => 3), array('Num' => 4)
             )
         );
     }
@@ -205,11 +204,11 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('ID' => 1, 'Field' => 1),
-            array('ID' => 2, 'Field' => 2),
-            array('ID' => 3, 'Field' => 3),
-            array('ID' => 4, 'Field' => 1),
-            (object) array('ID' => 5, 'Field' => 2)
+                array('ID' => 1, 'Field' => 1),
+                array('ID' => 2, 'Field' => 2),
+                array('ID' => 3, 'Field' => 3),
+                array('ID' => 4, 'Field' => 1),
+                (object)array('ID' => 5, 'Field' => 2)
             )
         );
 
@@ -263,7 +262,7 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Key' => 1), array('Key' => 2), array('Key' => 3)
+                array('Key' => 1), array('Key' => 2), array('Key' => 3)
             )
         );
         $this->assertEquals($list->first(), array('Key' => 1));
@@ -274,9 +273,9 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('ID' => 1, 'Name' => 'Steve',),
-            (object) array('ID' => 3, 'Name' => 'Bob'),
-            array('ID' => 5, 'Name' => 'John')
+                array('ID' => 1, 'Name' => 'Steve',),
+                (object)array('ID' => 3, 'Name' => 'Bob'),
+                array('ID' => 5, 'Name' => 'John')
             )
         );
         $map = $list->map('ID', 'Name');
@@ -285,9 +284,9 @@ class ArrayListTest extends SapphireTest
         $this->assertInstanceOf('SilverStripe\\ORM\\Map', $map);
         $this->assertEquals(
             array(
-            1 => 'Steve',
-            3 => 'Bob',
-            5 => 'John'
+                1 => 'Steve',
+                3 => 'Bob',
+                5 => 'John'
             ),
             $map->toArray()
         );
@@ -297,15 +296,15 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Name' => 'Steve'),
-            (object) array('Name' => 'Bob'),
-            array('Name' => 'John')
+                array('Name' => 'Steve'),
+                (object)array('Name' => 'Bob'),
+                array('Name' => 'John')
             )
         );
         $this->assertEquals(
             $list->find('Name', 'Bob'),
-            (object) array(
-            'Name' => 'Bob'
+            (object)array(
+                'Name' => 'Bob'
             )
         );
     }
@@ -314,15 +313,15 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Name' => 'Steve'),
-            (object) array('Name' => 'Bob'),
-            array('Name' => 'John')
+                array('Name' => 'Steve'),
+                (object)array('Name' => 'Bob'),
+                array('Name' => 'John')
             )
         );
         $this->assertEquals(
             $list->column('Name'),
             array(
-            'Steve', 'Bob', 'John'
+                'Steve', 'Bob', 'John'
             )
         );
     }
@@ -331,10 +330,10 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Name' => 'Steve'),
-            (object) array('Name' => 'Bob'),
-            array('Name' => 'John'),
-            array('Name' => 'bonny'),
+                array('Name' => 'Steve'),
+                (object)array('Name' => 'Bob'),
+                array('Name' => 'John'),
+                array('Name' => 'bonny'),
             )
         );
 
@@ -342,10 +341,10 @@ class ArrayListTest extends SapphireTest
         $list1 = $list->sort('Name');
         $this->assertEquals(
             array(
-            (object) array('Name' => 'Bob'),
-            array('Name' => 'bonny'),
-            array('Name' => 'John'),
-            array('Name' => 'Steve'),
+                (object)array('Name' => 'Bob'),
+                array('Name' => 'bonny'),
+                array('Name' => 'John'),
+                array('Name' => 'Steve'),
             ),
             $list1->toArray()
         );
@@ -354,10 +353,10 @@ class ArrayListTest extends SapphireTest
         $list2 = $list->sort('"Name"');
         $this->assertEquals(
             array(
-            (object) array('Name' => 'Bob'),
-            array('Name' => 'bonny'),
-            array('Name' => 'John'),
-            array('Name' => 'Steve'),
+                (object)array('Name' => 'Bob'),
+                array('Name' => 'bonny'),
+                array('Name' => 'John'),
+                array('Name' => 'Steve'),
             ),
             $list2->toArray()
         );
@@ -366,10 +365,10 @@ class ArrayListTest extends SapphireTest
         $list3 = $list->sort(array('"Name"'));
         $this->assertEquals(
             array(
-            (object) array('Name' => 'Bob'),
-            array('Name' => 'bonny'),
-            array('Name' => 'John'),
-            array('Name' => 'Steve'),
+                (object)array('Name' => 'Bob'),
+                array('Name' => 'bonny'),
+                array('Name' => 'John'),
+                array('Name' => 'Steve'),
             ),
             $list3->toArray()
         );
@@ -378,10 +377,10 @@ class ArrayListTest extends SapphireTest
         $list4 = $list->sort('"Record"."Name"');
         $this->assertEquals(
             array(
-            (object) array('Name' => 'Bob'),
-            array('Name' => 'bonny'),
-            array('Name' => 'John'),
-            array('Name' => 'Steve')
+                (object)array('Name' => 'Bob'),
+                array('Name' => 'bonny'),
+                array('Name' => 'John'),
+                array('Name' => 'Steve')
             ),
             $list4->toArray()
         );
@@ -390,10 +389,10 @@ class ArrayListTest extends SapphireTest
         $list5 = $list->sort('"Record"."Name" DESC');
         $this->assertEquals(
             array(
-            array('Name' => 'Steve'),
-            array('Name' => 'John'),
-            array('Name' => 'bonny'),
-            (object) array('Name' => 'Bob')
+                array('Name' => 'Steve'),
+                array('Name' => 'John'),
+                array('Name' => 'bonny'),
+                (object)array('Name' => 'Bob')
             ),
             $list5->toArray()
         );
@@ -402,10 +401,10 @@ class ArrayListTest extends SapphireTest
         $list6 = $list->sort('Record.Name');
         $this->assertEquals(
             array(
-            (object) array('Name' => 'Bob'),
-            array('Name' => 'bonny'),
-            array('Name' => 'John'),
-            array('Name' => 'Steve')
+                (object)array('Name' => 'Bob'),
+                array('Name' => 'bonny'),
+                array('Name' => 'John'),
+                array('Name' => 'Steve')
             ),
             $list6->toArray()
         );
@@ -413,10 +412,10 @@ class ArrayListTest extends SapphireTest
         // Check original list isn't altered
         $this->assertEquals(
             array(
-            array('Name' => 'Steve'),
-            (object) array('Name' => 'Bob'),
-            array('Name' => 'John'),
-            array('Name' => 'bonny'),
+                array('Name' => 'Steve'),
+                (object)array('Name' => 'Bob'),
+                array('Name' => 'John'),
+                array('Name' => 'bonny'),
             ),
             $list->toArray()
         );
@@ -429,7 +428,7 @@ class ArrayListTest extends SapphireTest
         // undesirable though so we're not enforcing it in tests.
         $original = array(
             array('Name' => 'Steve'),
-            (object) array('Name' => 'Bob'),
+            (object)array('Name' => 'Bob'),
             array('Name' => 'John'),
             array('Name' => 'bonny'),
             array('Name' => 'bonny1'),
@@ -440,7 +439,7 @@ class ArrayListTest extends SapphireTest
         $list = new ArrayList($original);
 
         $expected = array(
-            (object) array('Name' => 'Bob'),
+            (object)array('Name' => 'Bob'),
             array('Name' => 'bonny'),
             array('Name' => 'bonny1'),
             //array('Name' => 'bonny10'),
@@ -469,9 +468,9 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Name' => 'Steve'),
-            (object) array('Name' => 'Bob'),
-            array('Name' => 'John')
+                array('Name' => 'Steve'),
+                (object)array('Name' => 'Bob'),
+                array('Name' => 'John')
             )
         );
 
@@ -480,9 +479,9 @@ class ArrayListTest extends SapphireTest
         $this->assertEquals(
             $list1->toArray(),
             array(
-            (object) array('Name' => 'Bob'),
-            array('Name' => 'John'),
-            array('Name' => 'Steve')
+                (object)array('Name' => 'Bob'),
+                array('Name' => 'John'),
+                array('Name' => 'Steve')
             )
         );
 
@@ -491,9 +490,9 @@ class ArrayListTest extends SapphireTest
         $this->assertEquals(
             $list2->toArray(),
             array(
-            (object) array('Name' => 'Bob'),
-            array('Name' => 'John'),
-            array('Name' => 'Steve')
+                (object)array('Name' => 'Bob'),
+                array('Name' => 'John'),
+                array('Name' => 'Steve')
             )
         );
 
@@ -502,9 +501,9 @@ class ArrayListTest extends SapphireTest
         $this->assertEquals(
             $list3->toArray(),
             array(
-            (object) array('Name' => 'Bob'),
-            array('Name' => 'John'),
-            array('Name' => 'Steve')
+                (object)array('Name' => 'Bob'),
+                array('Name' => 'John'),
+                array('Name' => 'Steve')
             )
         );
 
@@ -513,9 +512,9 @@ class ArrayListTest extends SapphireTest
         $this->assertEquals(
             $list4->toArray(),
             array(
-            (object) array('Name' => 'Bob'),
-            array('Name' => 'John'),
-            array('Name' => 'Steve')
+                (object)array('Name' => 'Bob'),
+                array('Name' => 'John'),
+                array('Name' => 'Steve')
             )
         );
 
@@ -523,9 +522,9 @@ class ArrayListTest extends SapphireTest
         $this->assertEquals(
             $list->toArray(),
             array(
-            array('Name' => 'Steve'),
-            (object) array('Name' => 'Bob'),
-            array('Name' => 'John')
+                array('Name' => 'Steve'),
+                (object)array('Name' => 'Bob'),
+                array('Name' => 'John')
             )
         );
     }
@@ -534,9 +533,9 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Name' => 'Steve'),
-            (object) array('Name' => 'Bob'),
-            array('Name' => 'John')
+                array('Name' => 'Steve'),
+                (object)array('Name' => 'Bob'),
+                array('Name' => 'John')
             )
         );
 
@@ -545,9 +544,9 @@ class ArrayListTest extends SapphireTest
         $this->assertEquals(
             $list1->toArray(),
             array(
-            array('Name' => 'Steve'),
-            array('Name' => 'John'),
-            (object) array('Name' => 'Bob')
+                array('Name' => 'Steve'),
+                array('Name' => 'John'),
+                (object)array('Name' => 'Bob')
             )
         );
 
@@ -556,9 +555,9 @@ class ArrayListTest extends SapphireTest
         $this->assertEquals(
             $list2->toArray(),
             array(
-            array('Name' => 'Steve'),
-            array('Name' => 'John'),
-            (object) array('Name' => 'Bob')
+                array('Name' => 'Steve'),
+                array('Name' => 'John'),
+                (object)array('Name' => 'Bob')
             )
         );
 
@@ -567,9 +566,9 @@ class ArrayListTest extends SapphireTest
         $this->assertEquals(
             $list3->toArray(),
             array(
-            array('Name' => 'Steve'),
-            array('Name' => 'John'),
-            (object) array('Name' => 'Bob')
+                array('Name' => 'Steve'),
+                array('Name' => 'John'),
+                (object)array('Name' => 'Bob')
             )
         );
 
@@ -578,9 +577,9 @@ class ArrayListTest extends SapphireTest
         $this->assertEquals(
             $list4->toArray(),
             array(
-            array('Name' => 'Steve'),
-            array('Name' => 'John'),
-            (object) array('Name' => 'Bob')
+                array('Name' => 'Steve'),
+                array('Name' => 'John'),
+                (object)array('Name' => 'Bob')
             )
         );
 
@@ -588,9 +587,9 @@ class ArrayListTest extends SapphireTest
         $this->assertEquals(
             $list->toArray(),
             array(
-            array('Name' => 'Steve'),
-            (object) array('Name' => 'Bob'),
-            array('Name' => 'John')
+                array('Name' => 'Steve'),
+                (object)array('Name' => 'Bob'),
+                array('Name' => 'John')
             )
         );
     }
@@ -599,13 +598,13 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Sort' => 0),
-            array('Sort' => -1),
-            array('Sort' => 1),
-            array('Sort' => -2),
-            array('Sort' => 2),
-            array('Sort' => -10),
-            array('Sort' => 10)
+                array('Sort' => 0),
+                array('Sort' => -1),
+                array('Sort' => 1),
+                array('Sort' => -2),
+                array('Sort' => 2),
+                array('Sort' => -10),
+                array('Sort' => 10)
             )
         );
 
@@ -613,13 +612,13 @@ class ArrayListTest extends SapphireTest
         $list1 = $list->sort('Sort', 'DESC');
         $this->assertEquals(
             array(
-            array('Sort' => 10),
-            array('Sort' => 2),
-            array('Sort' => 1),
-            array('Sort' => 0),
-            array('Sort' => -1),
-            array('Sort' => -2),
-            array('Sort' => -10)
+                array('Sort' => 10),
+                array('Sort' => 2),
+                array('Sort' => 1),
+                array('Sort' => 0),
+                array('Sort' => -1),
+                array('Sort' => -2),
+                array('Sort' => -10)
             ),
             $list1->toArray()
         );
@@ -628,13 +627,13 @@ class ArrayListTest extends SapphireTest
         $list1 = $list->sort('Sort', 'ASC');
         $this->assertEquals(
             array(
-            array('Sort' => -10),
-            array('Sort' => -2),
-            array('Sort' => -1),
-            array('Sort' => 0),
-            array('Sort' => 1),
-            array('Sort' => 2),
-            array('Sort' => 10)
+                array('Sort' => -10),
+                array('Sort' => -2),
+                array('Sort' => -1),
+                array('Sort' => 0),
+                array('Sort' => 1),
+                array('Sort' => 2),
+                array('Sort' => 10)
             ),
             $list1->toArray()
         );
@@ -644,9 +643,9 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Name' => 'John'),
-            array('Name' => 'Bob'),
-            array('Name' => 'Steve')
+                array('Name' => 'John'),
+                array('Name' => 'Bob'),
+                array('Name' => 'Steve')
             )
         );
 
@@ -656,9 +655,9 @@ class ArrayListTest extends SapphireTest
         $this->assertEquals(
             $list->toArray(),
             array(
-            array('Name' => 'Steve'),
-            array('Name' => 'John'),
-            array('Name' => 'Bob')
+                array('Name' => 'Steve'),
+                array('Name' => 'John'),
+                array('Name' => 'Bob')
             )
         );
     }
@@ -667,9 +666,9 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            (object) array('Name'=>'Object1', 'F1'=>1, 'F2'=>2, 'F3'=>3),
-            (object) array('Name'=>'Object2', 'F1'=>2, 'F2'=>1, 'F3'=>4),
-            (object) array('Name'=>'Object3', 'F1'=>5, 'F2'=>2, 'F3'=>2),
+                (object)array('Name' => 'Object1', 'F1' => 1, 'F2' => 2, 'F3' => 3),
+                (object)array('Name' => 'Object2', 'F1' => 2, 'F2' => 1, 'F3' => 4),
+                (object)array('Name' => 'Object3', 'F1' => 5, 'F2' => 2, 'F3' => 2),
             )
         );
 
@@ -686,17 +685,17 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            (object) array('ID'=>3, 'Name'=>'Bert', 'Importance'=>1),
-            (object) array('ID'=>1, 'Name'=>'Aron', 'Importance'=>2),
-            (object) array('ID'=>2, 'Name'=>'Aron', 'Importance'=>1),
+                (object)array('ID' => 3, 'Name' => 'Bert', 'Importance' => 1),
+                (object)array('ID' => 1, 'Name' => 'Aron', 'Importance' => 2),
+                (object)array('ID' => 2, 'Name' => 'Aron', 'Importance' => 1),
             )
         );
 
-        $list = $list->sort(array('Name'=>'ASC', 'Importance'=>'ASC'));
+        $list = $list->sort(array('Name' => 'ASC', 'Importance' => 'ASC'));
         $this->assertEquals($list->first()->ID, 2, 'Aron.2 should be first in the list');
         $this->assertEquals($list->last()->ID, 3, 'Bert.3 should be last in the list');
 
-        $list = $list->sort(array('Name'=>'ASC', 'Importance'=>'DESC'));
+        $list = $list->sort(array('Name' => 'ASC', 'Importance' => 'DESC'));
         $this->assertEquals($list->first()->ID, 1, 'Aron.2 should be first in the list');
         $this->assertEquals($list->last()->ID, 3, 'Bert.3 should be last in the list');
     }
@@ -725,6 +724,7 @@ class ArrayListTest extends SapphireTest
         // This call will trigger a fatal error if there are issues with circular dependencies
         $items->sort('Sort');
     }
+
     /**
      * $list->filter('Name', 'bob'); // only bob in the list
      */
@@ -732,13 +732,13 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Name' => 'Steve'),
-            (object) array('Name' => 'Bob'),
-            array('Name' => 'John')
+                array('Name' => 'Steve'),
+                (object)array('Name' => 'Bob'),
+                array('Name' => 'John')
             )
         );
         $list = $list->filter('Name', 'Bob');
-        $this->assertEquals(array((object)array('Name'=>'Bob')), $list->toArray(), 'List should only contain Bob');
+        $this->assertEquals(array((object)array('Name' => 'Bob')), $list->toArray(), 'List should only contain Bob');
     }
 
     /**
@@ -748,9 +748,9 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Name' => 'Steve'),
-            (object) array('Name' => 'Bob'),
-            array('Name' => 'John')
+                array('Name' => 'Steve'),
+                (object)array('Name' => 'Bob'),
+                array('Name' => 'John')
             )
         );
 
@@ -758,7 +758,7 @@ class ArrayListTest extends SapphireTest
             array('Name' => 'Steve'),
             array('Name' => 'John')
         );
-        $list = $list->filter('Name', array('Steve','John'));
+        $list = $list->filter('Name', array('Steve', 'John'));
         $this->assertEquals($expected, $list->toArray(), 'List should only contain Steve and John');
     }
 
@@ -769,12 +769,12 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Name' => 'Steve', 'ID' => 1),
-            (object) array('Name' => 'Steve', 'ID' => 2),
-            array('Name' => 'John', 'ID' => 2)
+                array('Name' => 'Steve', 'ID' => 1),
+                (object)array('Name' => 'Steve', 'ID' => 2),
+                array('Name' => 'John', 'ID' => 2)
             )
         );
-        $list = $list->filter(array('Name'=>'Clair'));
+        $list = $list->filter(array('Name' => 'Clair'));
         $this->assertEquals(array(), $list->toArray(), 'List should be empty');
     }
 
@@ -785,14 +785,14 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Name' => 'Steve', 'ID' => 1),
-            (object) array('Name' => 'Steve', 'ID' => 2),
-            array('Name' => 'John', 'ID' => 2)
+                array('Name' => 'Steve', 'ID' => 1),
+                (object)array('Name' => 'Steve', 'ID' => 2),
+                array('Name' => 'John', 'ID' => 2)
             )
         );
-        $list = $list->filter(array('Name'=>'Steve', 'ID'=>2));
+        $list = $list->filter(array('Name' => 'Steve', 'ID' => 2));
         $this->assertEquals(
-            array((object)array('Name'=>'Steve', 'ID'=>2)),
+            array((object)array('Name' => 'Steve', 'ID' => 2)),
             $list->toArray(),
             'List should only contain object Steve'
         );
@@ -805,12 +805,12 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Name' => 'Steve', 'ID' => 1),
-            (object) array('Name' => 'Steve', 'ID' => 2),
-            array('Name' => 'John', 'ID' => 2)
+                array('Name' => 'Steve', 'ID' => 1),
+                (object)array('Name' => 'Steve', 'ID' => 2),
+                array('Name' => 'John', 'ID' => 2)
             )
         );
-        $list = $list->filter(array('Name'=>'Steve', 'ID'=>4));
+        $list = $list->filter(array('Name' => 'Steve', 'ID' => 4));
         $this->assertEquals(array(), $list->toArray(), 'List should be empty');
     }
 
@@ -821,18 +821,18 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Name' => 'Steve', 'ID' => 1, 'Age'=>21),
-            array('Name' => 'Steve', 'ID' => 2, 'Age'=>18),
-            array('Name' => 'Clair', 'ID' => 2, 'Age'=>21),
-            array('Name' => 'Steve', 'ID' => 3, 'Age'=>43)
+                array('Name' => 'Steve', 'ID' => 1, 'Age' => 21),
+                array('Name' => 'Steve', 'ID' => 2, 'Age' => 18),
+                array('Name' => 'Clair', 'ID' => 2, 'Age' => 21),
+                array('Name' => 'Steve', 'ID' => 3, 'Age' => 43)
             )
         );
 
-        $list = $list->filter(array('Name'=>'Steve','Age'=>array(21, 43)));
+        $list = $list->filter(array('Name' => 'Steve', 'Age' => array(21, 43)));
 
         $expected = array(
-            array('Name' => 'Steve', 'ID' => 1, 'Age'=>21),
-            array('Name' => 'Steve', 'ID' => 3, 'Age'=>43)
+            array('Name' => 'Steve', 'ID' => 1, 'Age' => 21),
+            array('Name' => 'Steve', 'ID' => 3, 'Age' => 43)
         );
         $this->assertEquals(2, $list->count());
         $this->assertEquals($expected, $list->toArray(), 'List should only contain Steve and Steve');
@@ -845,20 +845,20 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Name' => 'Steve', 'ID' => 1, 'Age'=>21),
-            array('Name' => 'Steve', 'ID' => 2, 'Age'=>18),
-            array('Name' => 'Clair', 'ID' => 2, 'Age'=>21),
-            array('Name' => 'Clair', 'ID' => 2, 'Age'=>52),
-            array('Name' => 'Steve', 'ID' => 3, 'Age'=>43)
+                array('Name' => 'Steve', 'ID' => 1, 'Age' => 21),
+                array('Name' => 'Steve', 'ID' => 2, 'Age' => 18),
+                array('Name' => 'Clair', 'ID' => 2, 'Age' => 21),
+                array('Name' => 'Clair', 'ID' => 2, 'Age' => 52),
+                array('Name' => 'Steve', 'ID' => 3, 'Age' => 43)
             )
         );
 
-        $list = $list->filter(array('Name'=>array('Steve','Clair'),'Age'=>array(21, 43)));
+        $list = $list->filter(array('Name' => array('Steve', 'Clair'), 'Age' => array(21, 43)));
 
         $expected = array(
-            array('Name' => 'Steve', 'ID' => 1, 'Age'=>21),
-            array('Name' => 'Clair', 'ID' => 2, 'Age'=>21),
-            array('Name' => 'Steve', 'ID' => 3, 'Age'=>43)
+            array('Name' => 'Steve', 'ID' => 1, 'Age' => 21),
+            array('Name' => 'Clair', 'ID' => 2, 'Age' => 21),
+            array('Name' => 'Steve', 'ID' => 3, 'Age' => 43)
         );
 
         $this->assertEquals(3, $list->count());
@@ -870,12 +870,12 @@ class ArrayListTest extends SapphireTest
 
         $list = new ArrayList(
             array(
-            $steve = array('Name' => 'Steve', 'ID' => 1, 'Age' => 21),
-            $bob = array('Name' => 'Bob', 'ID' => 2, 'Age' => 18),
-            $clair = array('Name' => 'Clair', 'ID' => 3, 'Age' => 21),
-            $phil = array('Name' => 'Phil', 'ID' => 4, 'Age' => 21),
-            $oscar = array('Name' => 'Oscar', 'ID' => 5, 'Age' => 52),
-            $mike = array('Name' => 'Mike', 'ID' => 6, 'Age' => 43),
+                $steve = array('Name' => 'Steve', 'ID' => 1, 'Age' => 21),
+                $bob = array('Name' => 'Bob', 'ID' => 2, 'Age' => 18),
+                $clair = array('Name' => 'Clair', 'ID' => 3, 'Age' => 21),
+                $phil = array('Name' => 'Phil', 'ID' => 4, 'Age' => 21),
+                $oscar = array('Name' => 'Oscar', 'ID' => 5, 'Age' => 52),
+                $mike = array('Name' => 'Mike', 'ID' => 6, 'Age' => 43),
             )
         );
 
@@ -941,11 +941,11 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            $steve = array('Name' => 'Steve', 'ID' => 1, 'Age' => 21),
-            array('Name' => 'Bob', 'ID' => 2, 'Age' => 18),
-            $clair = array('Name' => 'Clair', 'ID' => 2, 'Age' => 21),
-            array('Name' => 'Oscar', 'ID' => 2, 'Age' => 52),
-            array('Name' => 'Mike', 'ID' => 3, 'Age' => 43)
+                $steve = array('Name' => 'Steve', 'ID' => 1, 'Age' => 21),
+                array('Name' => 'Bob', 'ID' => 2, 'Age' => 18),
+                $clair = array('Name' => 'Clair', 'ID' => 2, 'Age' => 21),
+                array('Name' => 'Oscar', 'ID' => 2, 'Age' => 52),
+                array('Name' => 'Mike', 'ID' => 3, 'Age' => 43)
             )
         );
 
@@ -968,9 +968,9 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Name' => 'Steve'),
-            array('Name' => 'Bob'),
-            array('Name' => 'John')
+                array('Name' => 'Steve'),
+                array('Name' => 'Bob'),
+                array('Name' => 'John')
             )
         );
 
@@ -990,9 +990,9 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Name' => 'Steve'),
-            array('Name' => 'Bob'),
-            array('Name' => 'John')
+                array('Name' => 'Steve'),
+                array('Name' => 'Bob'),
+                array('Name' => 'John')
             )
         );
 
@@ -1012,12 +1012,12 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Name' => 'Steve'),
-            array('Name' => 'Bob'),
-            array('Name' => 'John')
+                array('Name' => 'Steve'),
+                array('Name' => 'Bob'),
+                array('Name' => 'John')
             )
         );
-        $list = $list->exclude('Name', array('Steve','John'));
+        $list = $list->exclude('Name', array('Steve', 'John'));
         $expected = array(array('Name' => 'Bob'));
         $this->assertEquals(1, $list->count());
         $this->assertEquals($expected, $list->toArray(), 'List should only contain Bob');
@@ -1030,9 +1030,9 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Name' => 'Bob' , 'Age' => 21),
-            array('Name' => 'Bob' , 'Age' => 32),
-            array('Name' => 'John', 'Age' => 21)
+                array('Name' => 'Bob', 'Age' => 21),
+                array('Name' => 'Bob', 'Age' => 32),
+                array('Name' => 'John', 'Age' => 21)
             )
         );
 
@@ -1054,18 +1054,18 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Name' => 'bob', 'Age' => 10),
-            array('Name' => 'phil', 'Age' => 11),
-            array('Name' => 'bob', 'Age' => 12),
-            array('Name' => 'phil', 'Age' => 12),
-            array('Name' => 'bob', 'Age' => 14),
-            array('Name' => 'phil', 'Age' => 14),
-            array('Name' => 'bob', 'Age' => 16),
-            array('Name' => 'phil', 'Age' => 16)
+                array('Name' => 'bob', 'Age' => 10),
+                array('Name' => 'phil', 'Age' => 11),
+                array('Name' => 'bob', 'Age' => 12),
+                array('Name' => 'phil', 'Age' => 12),
+                array('Name' => 'bob', 'Age' => 14),
+                array('Name' => 'phil', 'Age' => 14),
+                array('Name' => 'bob', 'Age' => 16),
+                array('Name' => 'phil', 'Age' => 16)
             )
         );
 
-        $list = $list->exclude(array('Name'=>array('bob','phil'),'Age'=>array(10, 16)));
+        $list = $list->exclude(array('Name' => array('bob', 'phil'), 'Age' => array(10, 16)));
         $expected = array(
             array('Name' => 'phil', 'Age' => 11),
             array('Name' => 'bob', 'Age' => 12),
@@ -1083,18 +1083,18 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Name' => 'bob', 'Age' => 10),
-            array('Name' => 'phil', 'Age' => 11),
-            array('Name' => 'bob', 'Age' => 12),
-            array('Name' => 'phil', 'Age' => 12),
-            array('Name' => 'bob', 'Age' => 14),
-            array('Name' => 'phil', 'Age' => 14),
-            array('Name' => 'bob', 'Age' => 16),
-            array('Name' => 'phil', 'Age' => 16)
+                array('Name' => 'bob', 'Age' => 10),
+                array('Name' => 'phil', 'Age' => 11),
+                array('Name' => 'bob', 'Age' => 12),
+                array('Name' => 'phil', 'Age' => 12),
+                array('Name' => 'bob', 'Age' => 14),
+                array('Name' => 'phil', 'Age' => 14),
+                array('Name' => 'bob', 'Age' => 16),
+                array('Name' => 'phil', 'Age' => 16)
             )
         );
 
-        $list = $list->exclude(array('Name'=>array('bob','phil'),'Age'=>array(10, 16),'Bananas'=>true));
+        $list = $list->exclude(array('Name' => array('bob', 'phil'), 'Age' => array(10, 16), 'Bananas' => true));
         $expected = array(
             array('Name' => 'bob', 'Age' => 10),
             array('Name' => 'phil', 'Age' => 11),
@@ -1115,30 +1115,30 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Name' => 'bob', 'Age' => 10, 'HasBananas'=>false),
-            array('Name' => 'phil','Age' => 11, 'HasBananas'=>true),
-            array('Name' => 'bob', 'Age' => 12, 'HasBananas'=>true),
-            array('Name' => 'phil','Age' => 12, 'HasBananas'=>true),
-            array('Name' => 'bob', 'Age' => 14, 'HasBananas'=>false),
-            array('Name' => 'ann', 'Age' => 14, 'HasBananas'=>true),
-            array('Name' => 'phil','Age' => 14, 'HasBananas'=>false),
-            array('Name' => 'bob', 'Age' => 16, 'HasBananas'=>false),
-            array('Name' => 'phil','Age' => 16, 'HasBananas'=>true),
-            array('Name' => 'clair','Age' => 16, 'HasBananas'=>true)
+                array('Name' => 'bob', 'Age' => 10, 'HasBananas' => false),
+                array('Name' => 'phil', 'Age' => 11, 'HasBananas' => true),
+                array('Name' => 'bob', 'Age' => 12, 'HasBananas' => true),
+                array('Name' => 'phil', 'Age' => 12, 'HasBananas' => true),
+                array('Name' => 'bob', 'Age' => 14, 'HasBananas' => false),
+                array('Name' => 'ann', 'Age' => 14, 'HasBananas' => true),
+                array('Name' => 'phil', 'Age' => 14, 'HasBananas' => false),
+                array('Name' => 'bob', 'Age' => 16, 'HasBananas' => false),
+                array('Name' => 'phil', 'Age' => 16, 'HasBananas' => true),
+                array('Name' => 'clair', 'Age' => 16, 'HasBananas' => true)
             )
         );
 
-        $list = $list->exclude(array('Name'=>array('bob','phil'),'Age'=>array(10, 16),'HasBananas'=>true));
+        $list = $list->exclude(array('Name' => array('bob', 'phil'), 'Age' => array(10, 16), 'HasBananas' => true));
         $expected = array(
-            array('Name' => 'bob', 'Age' => 10, 'HasBananas'=>false),
-            array('Name' => 'phil','Age' => 11, 'HasBananas'=>true),
-            array('Name' => 'bob', 'Age' => 12, 'HasBananas'=>true),
-            array('Name' => 'phil','Age' => 12, 'HasBananas'=>true),
-            array('Name' => 'bob', 'Age' => 14, 'HasBananas'=>false),
-            array('Name' => 'ann', 'Age' => 14, 'HasBananas'=>true),
-            array('Name' => 'phil','Age' => 14, 'HasBananas'=>false),
-            array('Name' => 'bob', 'Age' => 16, 'HasBananas'=>false),
-            array('Name' => 'clair','Age' => 16, 'HasBananas'=>true)
+            array('Name' => 'bob', 'Age' => 10, 'HasBananas' => false),
+            array('Name' => 'phil', 'Age' => 11, 'HasBananas' => true),
+            array('Name' => 'bob', 'Age' => 12, 'HasBananas' => true),
+            array('Name' => 'phil', 'Age' => 12, 'HasBananas' => true),
+            array('Name' => 'bob', 'Age' => 14, 'HasBananas' => false),
+            array('Name' => 'ann', 'Age' => 14, 'HasBananas' => true),
+            array('Name' => 'phil', 'Age' => 14, 'HasBananas' => false),
+            array('Name' => 'bob', 'Age' => 16, 'HasBananas' => false),
+            array('Name' => 'clair', 'Age' => 16, 'HasBananas' => true)
         );
         $this->assertEquals($expected, $list->toArray());
     }
@@ -1147,9 +1147,9 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('Name' => 'Steve'),
-            array('Name' => 'Bob'),
-            array('Name' => 'John')
+                array('Name' => 'Steve'),
+                array('Name' => 'Bob'),
+                array('Name' => 'John')
             )
         );
 
@@ -1169,9 +1169,9 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('ID' => 1, 'Name' => 'Steve'),
-            array('ID' => 2, 'Name' => 'Bob'),
-            array('ID' => 3, 'Name' => 'John')
+                array('ID' => 1, 'Name' => 'Steve'),
+                array('ID' => 2, 'Name' => 'Bob'),
+                array('ID' => 3, 'Name' => 'John')
             )
         );
 
@@ -1189,9 +1189,9 @@ class ArrayListTest extends SapphireTest
     {
         $list = new ArrayList(
             array(
-            array('ID' => 1, 'Name' => 'Steve'),
-            array('ID' => 2, 'Name' => 'Bob'),
-            array('ID' => 3, 'Name' => 'John')
+                array('ID' => 1, 'Name' => 'Steve'),
+                array('ID' => 2, 'Name' => 'Bob'),
+                array('ID' => 3, 'Name' => 'John')
             )
         );
         $knownIDs = $list->column('ID');
@@ -1209,5 +1209,17 @@ class ArrayListTest extends SapphireTest
 
         $element = $list->byID(1);
         $this->assertNull($element);
+    }
+
+    public function testDataClass()
+    {
+        $list = new ArrayList([
+            new DataObject(['Title' => 'one']),
+        ]);
+        $this->assertEquals(DataObject::class, $list->dataClass());
+        $list->pop();
+        $this->assertNull($list->dataClass());
+        $list->setDataClass(DataObject::class);
+        $this->assertEquals(DataObject::class, $list->dataClass());
     }
 }
